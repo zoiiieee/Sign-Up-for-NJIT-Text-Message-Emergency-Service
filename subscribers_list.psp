@@ -1,0 +1,47 @@
+<%@ page language="PL/SQL" %>
+<%@ plsql procedure="subscribers_list" %>
+<%@ plsql parameter="areacode" type="NUMBER" default="NULL" %>
+<%@ plsql parameter="first3" type="NUMBER" default="NULL" %>
+<%@ plsql parameter="last4" type="NUMBER" default="NULL" %>
+<%@ plsql parameter="cellphoneprovider" type="VARCHAR2" default="NULL" %>
+<%@ plsql parameter="submit" type="VARCHAR2" default="NULL" %>
+<%! CURSOR cursor IS SELECT CELLPHONE, PROVIDER from SUBSCRIPTION_TABLE WHERE STATUS = 'SUBSCRIBED';  %>
+<html>
+<head>
+<title>Subscription List</title>
+<style>
+table, th, td {
+    border: 1px solid black;
+ 
+}
+th
+{
+  fontsize:16;
+}
+td
+{
+  fontsize:13;
+}
+</style>
+</head>
+<body bgcolor="blue">
+<h1 align="center" style="color:black">List of Subscribers </h1>
+<table border="1" align="center">
+         <tr>
+              <th> Phone Number </th>
+	      <th> Carrier </th>
+          </tr>
+<% FOR data in cursor LOOP %>
+<tr>
+<td><%= data.CELLPHONE %></td>
+<td><%= data.PROVIDER %></td>
+</tr>
+<% END LOOP; %>
+</table>
+<br><br>
+<p1 align="center" style="color:white"> These are the subscribers</p1><br><br>
+<p2 align="center" style="color:white"><a href="registrationfile">Go back</a></p2>
+
+</body>
+</html>     
+

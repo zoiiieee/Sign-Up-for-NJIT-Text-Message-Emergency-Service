@@ -1,0 +1,51 @@
+<%@ page language="PL/SQL" %>
+<%@ plsql procedure="insert_details" %>
+<%@ plsql parameter="areacode" type="NUMBER" default="NULL" %>
+<%@ plsql parameter="first3" type="NUMBER" default="NULL" %>
+<%@ plsql parameter="last4" type="NUMBER" default="NULL" %>
+<%@ plsql parameter="cellphoneprovider" type="VARCHAR2" default="NULL" %>
+<%@ plsql parameter="subscription" type="VARCHAR2" default="NULL" %>
+<%@ plsql parameter="submit" type="VARCHAR2" default="NULL" %>
+<html>
+<%! PHONE NUMBER(10) := (((areacode*1000) + first3)*10000 + last4); %>
+<% IF subscription = 'subscribe'
+     THEN
+         IF ((LENGTH(areacode) < 3) or (LENGTH(first3) < 3) or (LENGTH(last4) < 4)) 
+             THEN 
+                 NULL; 
+                        %>
+<script>
+alert("PLEASE INPUT IN CORRECT FORMAT. THANK YOU!");
+</script>
+        <% ELSE  
+             INSERT INTO SUBSCRIPTION_TABLE (CELLPHONE, PROVIDER, STATUS) VALUES (PHONE, cellphoneprovider, 'SUBSCRIBED'); 
+               COMMIT;
+                       %>
+<head>
+<title>Subscription Page</title>
+<style>
+p1
+{
+align="center";
+  fontsize:70;
+}
+p2
+{
+  fontsize:50;
+}
+</style>
+</head>
+<body bgcolor="blue"> </body>
+<p1 align="center" style="color:white">Thank You!<br> You have successfully subscribed to the NJIT's Emergency Alerts Service.<br><br>Have a nice day.</p1>
+<br><p2 align="center"><a href="registrationfile">Go back</a></p2>        
+<% END IF; %>
+<% ELSIF subscription = 'unsubscribe'
+     THEN
+       UPDATE SUBSCRIPTION_TABLE SET STATUS = 'UNSUBSCRIBED' WHERE CELLPHONE = PHONE AND PROVIDER = cellphoneprovider;       
+         COMMIT;
+%>
+<body bgcolor="blue"> </body>
+<p3 style="color:white"> Thank You!<br> You have successfully unsubscribed from NJIT's Emergency Alerts Service.<br>Have a nice day.</p3>
+<br><p4 style="color:white"><a href="registrationfile">Go back</a></p4>
+<% END IF; %>
+</html>

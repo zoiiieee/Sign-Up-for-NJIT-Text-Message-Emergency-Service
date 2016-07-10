@@ -1,0 +1,47 @@
+<%@ page language="PL/SQL" %>
+<%@ plsql procedure="registrationfile" %>
+<html>
+<head>
+<title>Sign Up for NJIT Text-Message Emergency Alerts</title>
+<style>
+h1
+{
+font-size:30px;
+}
+p 
+{ 
+ font-size:14px;   		
+		
+ }
+</style>
+</head>
+<h1 align="center" style="color:black">Sign Up for NJIT Text-Message Emergency Alerts</h1>
+<p style="color:white">To recieve NJIT Text-Message Emergency Alerts enter your <strong>cell phone number</strong>, select your <strong>cell phone carrier</strong> select <strong>"Subscribe"</strong> from Subscription Activation Selection and click the <strong>"Submit"</strong> button. You can cancel this service at any time by selecting "Unsubscribe".</p>
+<body bgcolor="blue">
+<form name="form" action="insert_details" method="post">
+<table align="center">
+<tr><td style="color:white">Area Code: </td> <td><input type="text" name="areacode" id="areacode" size="3" maxlength="3"/></td></tr>
+<tr><td style="color:white">First 3 Digits:</td> <td><input type="text" name="first3" size="3" maxlength="3"/></td></tr>
+<tr><td style="color:white">Last 4 Digits:</td> <td><input type="text" name="last4" size="4" maxlength="4"/></td></tr>
+<tr><td style="color:white">Cell Phone Provider:</td>
+<td><select name="cellphoneprovider" id="cellphoneprovider">
+<option name="Verizon">VERIZON</option>
+<option name="AT&T">AT&T</option>
+<option name="Lyca">LYCA</option>
+<option name="TMobile">T-MOBILE</option>
+<option name="Sprint">SPRINT</option>
+</select></td>
+</tr>
+<tr>
+	<td style="color:white">Subscription Activation Selection: </td>
+	<td style="color:white" align="left"><input type="radio" name="subscription" value="subscribe">Subscribe</td>
+	<td style="color:white" align="left"><input type="radio" name="subscription" value="unsubscribe">Unsubscribe</td>
+</tr>
+<tr><td><input type="submit" name="submit" value="Submit"/>&nbsp; &nbsp;<input type="reset" name="reset"/></td></tr> 
+</table>
+</form>
+<br>
+<p align="center" style="color:white"><a href="subscribers_list">See Subscribers</a></p>
+</body>
+</html>         
+	
